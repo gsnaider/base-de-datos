@@ -331,11 +331,131 @@ CREATE TABLE experiencias_laborales_empresas (
 );
 
 
+-- Anuncios
 
+
+CREATE TABLE anuncios_empleos (
+  id_anuncio INTEGER NOT NULL,
+  cargo VARCHAR(50) NOT NULL,
+  ubicacion VARCHAR(300),
+  antiguedad VARCHAR(30),
+  tipo VARCHAR(50),
+  descripcion VARCHAR(500),
+  id_empresa INTEGER NOT NULL,
+  id_usuario_creador INTEGER NOT NULL,
+  CONSTRAINT pk_anuncios_empleos 
+    PRIMARY KEY (id_anuncio),
+  CONSTRAINT fk_anuncios_empresas 
+    FOREIGN KEY (id_empresa)
+    REFERENCES empresas (id_empresa)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_anuncios_usuarios 
+    FOREIGN KEY (id_usuario_creador)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT 
+);
+
+
+CREATE TABLE aplicaciones_anuncios (
+  id_usuario INTEGER NOT NULL,
+  id_anuncio INTEGER NOT NULL,
+  CONSTRAINT pk_aplicaciones_anuncios 
+    PRIMARY KEY (id_usuario, id_anuncio),
+  CONSTRAINT fk_aplicaciones_anuncios_anuncios 
+    FOREIGN KEY (id_anuncio)
+    REFERENCES anuncios_empleos (id_anuncio)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_aplicaciones_anuncios_usuarios 
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT 
+);
+
+CREATE TABLE anuncios_guardados (
+  id_usuario INTEGER NOT NULL,
+  id_anuncio INTEGER NOT NULL,
+  CONSTRAINT pk_anuncios_guardados 
+    PRIMARY KEY (id_usuario, id_anuncio),
+  CONSTRAINT fk_anuncios_guardados_anuncios 
+    FOREIGN KEY (id_anuncio)
+    REFERENCES anuncios_empleos (id_anuncio)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_anuncios_guardados_usuarios 
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT 
+);
+
+
+
+CREATE TABLE posts (
+  id_post INTEGER NOT NULL,
+  texto VARCHAR(500) NOT NULL,
+  id_usuario INTEGER NOT NULL,
+  CONSTRAINT pk_posts
+    PRIMARY KEY (id_post),
+  CONSTRAINT fk_posts_usuarios 
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT 
+);
+
+
+CREATE TABLE likes (
+  id_post INTEGER NOT NULL,
+  id_usuario INTEGER NOT NULL,
+  CONSTRAINT pk_likes
+    PRIMARY KEY (id_post, id_usuario),
+  CONSTRAINT fk_likes_posts
+    FOREIGN KEY (id_post)
+    REFERENCES posts (id_post)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,  
+  CONSTRAINT fk_likes_usuarios
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT 
+);
+
+
+CREATE TABLE comentarios (
+  id_comentario INTEGER NOT NULL,
+  texto VARCHAR(500) NOT NULL,
+  id_post INTEGER NOT NULL,
+  id_usuario INTEGER NOT NULL,
+  CONSTRAINT pk_comentarios
+    PRIMARY KEY (id_comentario),
+  CONSTRAINT fk_comentarios_posts
+    FOREIGN KEY (id_post)
+    REFERENCES posts (id_post)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,  
+  CONSTRAINT fk_comentarios_usuarios
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT 
+);
+
+
+CREATE TABLE mensajes (
+  id_mensaje INTEGER NOT NULL,
+  texto VARCHAR(500) NOT NULL,
+  id_usuario_origen INTEGER NOT NULL,
+  id_usuario_destino INTEGER NOT NULL,
+  CONSTRAINT pk_mensajes
+    PRIMARY KEY (id_mensaje),
+  CONSTRAINT fk_mensajes_usuario_origen
+    FOREIGN KEY (id_usuario_origen)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_mensajes_usuario_destino
+    FOREIGN KEY (id_usuario_destino)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT 
+);
 
 
 
 -- Inserts
+
 INSERT INTO usuarios
   VALUES (1, 
           'Gaston Snaider', 
