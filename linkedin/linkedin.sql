@@ -456,10 +456,142 @@ CREATE TABLE mensajes (
 
 -- Inserts
 
-INSERT INTO usuarios
-  VALUES (1, 
-          'Gaston Snaider', 
-          'Ingeniero en Informatica', 
-          'Buenos Aires', 
-          'Software', 
-          'Soy un ingeniero en informatica buscando una empresa con proyectos desafiantes.');
+INSERT INTO usuarios VALUES 
+  (
+    1, 
+    'Juan Lopez', 
+    'Ingeniero Informatico', 
+    'Buenos Aires', 
+    'Software', 
+    'Soy un Ingeniero informatico buscando proyectos desafiantes.'),
+  (
+    2, 
+    'Martin Martinez', 
+    'Licenciado en Ciencias de Computacion', 
+    'Buenos Aires', 
+    'Software', 
+    NULL),
+  (
+    3, 
+    'Gonzalo Gonzalez', 
+    'Estudiante de Marketing', 
+    'Cordoba', 
+    'Marketing', 
+    'Soy un estudiante de 3er año de Marketing, buscando nuevos desafios.'),
+  (
+    4, 
+    'Pablo Perez', 
+    'Ingeniero Industrial', 
+    'Cordoba', 
+    'Automotriz', 
+    NULL),
+  (
+    5, 
+    'Lucia Onelli', 
+    'Gerente de Marketing', 
+    'Cordoba', 
+    'Marketing', 
+    NULL),
+  (
+    6, 
+    'Paula Molina', 
+    'Estudiante de Administracion de empresas', 
+    'Buenos Aires', 
+    NULL, 
+    NULL),
+  (
+    7, 
+    'Jorge Empresas', 
+    NULL, 
+    NULL, 
+    NULL, 
+    NULL);
+
+
+
+INSERT INTO empresas VALUES 
+(
+    1, 
+    'Google', 
+    'Internet', 
+    'Google’s mission is to organize the world‘s information and make it universally accessible and useful.',
+    1998, 
+    'http://www.google.com',
+    'Empresa pública',
+    90000,
+    7),
+  (
+    2, 
+    'Amazon', 
+    'Internet', 
+    'Amazon tiene la misión de ser la compañía más orientada al cliente del mundo, en la que las personas puedan encontrar prácticamente cualquier producto que quieran comprar en línea.',
+    1994, 
+    'http://www.amazon.com',
+    'Empresa pública',
+    566000,
+    7),
+  (
+    3, 
+    'Mercado Libre', 
+    'Internet', 
+    'Fundada en 1999, Mercado Libre es una compañía de tecnología que desarrolla soluciones para que individuos y empresas puedan comprar, vender, anunciar, enviar y pagar bienes y servicios en Internet.',
+    1999, 
+    'http://www.mercadolibre.com',
+    'De financiación privada',
+    4000,
+    7),
+
+  (
+    4, 
+    'Despegar.com', 
+    'Turismo', 
+    'Despegar es la empresa de viajes online líder en Latinoamérica.',
+    1999, 
+    'http://www.despegar.com',
+    'De financiación privada',
+    9000,
+    7),
+
+  (
+    5, 
+    'Toyota', 
+    'Automotriz', 
+    'Toyota Motor Corporation is a global automotive industry leader manufacturing vehicles in 27 countries or regions and marketing the company’s products in over 170 countries and regions.',
+    1937, 
+    'http://www.toyota-global.com/',
+    'Empresa pública',
+    369124,
+    7),
+
+  (
+    6, 
+    'Starbucks', 
+    'Venta al por menor', 
+    'By bringing people together over coffee, Starbucks has become one of the world’s best-known and best-loved companies.',
+    1971, 
+    'http://www.starbucks.com/careers',
+    'Empresa publica',
+    250135,
+    7),
+
+  (
+    7, 
+    'Globant', 
+    'Informatica', 
+    'We are a digitally native company where innovation, design and engineering meet scale. We use the latest technologies in the digital and cognitive field to empower organizations in every aspect.',
+    2003, 
+    'http://www.globant.com',
+    'Empresa pública',
+    7000,
+    7),
+
+  (
+    8, 
+    'General Motors', 
+    'Automotriz', 
+    'At General Motors, we are passionate about moving towards a world with zero crashes, zero emissions and zero congestion.',
+    NULL, 
+    'http://www.gm.com',
+    'Empresa publica',
+    180000,
+    7);
