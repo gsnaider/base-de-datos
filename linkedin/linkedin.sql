@@ -3,7 +3,7 @@
 CREATE TABLE usuarios (
   id_usuario INTEGER NOT NULL,
   nombre VARCHAR(30) NOT NULL,
-  titulo VARCHAR(30),
+  titulo VARCHAR(50),
   ubicacion VARCHAR(300),
   industria VARCHAR(30),
   extracto VARCHAR(500),
