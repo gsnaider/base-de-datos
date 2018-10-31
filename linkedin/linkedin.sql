@@ -117,7 +117,203 @@ CREATE TABLE experiencias_laborales (
 );
 
 
--- Ejecutar despues de crear tabla empresas
+-- Logros
+
+
+CREATE TABLE logros (
+  id_usuario INTEGER NOT NULL,
+  id_logro INTEGER NOT NULL,
+  nombre VARCHAR(50) NOT NULL,
+  CONSTRAINT pk_logros 
+    PRIMARY KEY (id_usuario, id_logro),
+  CONSTRAINT fk_logros_usuarios 
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+
+CREATE TABLE cursos (
+  id_usuario INTEGER NOT NULL,
+  id_logro INTEGER NOT NULL,
+  numero VARCHAR(30),
+  CONSTRAINT pk_cursos 
+    PRIMARY KEY (id_usuario, id_logro),
+  CONSTRAINT fk_cursos_logros 
+    FOREIGN KEY (id_usuario, id_logro)
+    REFERENCES logros (id_usuario, id_logro)
+    ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+
+CREATE TABLE proyectos (
+  id_usuario INTEGER NOT NULL,
+  id_logro INTEGER NOT NULL,
+  fecha_inicial DATE,
+  fecha_final DATE,
+  url VARCHAR(500),
+  descripcion VARCHAR(500),
+  CONSTRAINT pk_proyectos 
+    PRIMARY KEY (id_usuario, id_logro),
+  CONSTRAINT fk_proyectos_logros 
+    FOREIGN KEY (id_usuario, id_logro)
+    REFERENCES logros (id_usuario, id_logro)
+    ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+
+CREATE TABLE creadores_proyectos (
+  id_usuario INTEGER NOT NULL,
+  id_logro INTEGER NOT NULL,
+  id_usuario_creador INTEGER NOT NULL,
+  CONSTRAINT pk_creadores_proyectos 
+    PRIMARY KEY (id_usuario, id_logro, id_usuario_creador),
+  CONSTRAINT fk_creadores_proyectos_proyectos 
+    FOREIGN KEY (id_usuario, id_logro)
+    REFERENCES proyectos (id_usuario, id_logro)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_creadores_proyectos_usuarios 
+    FOREIGN KEY (id_usuario_creador)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT   
+);
+
+
+
+CREATE TABLE certificaciones (
+  id_usuario INTEGER NOT NULL,
+  id_logro INTEGER NOT NULL,
+  autoridad_emisora VARCHAR(50),
+  numero_licencia VARCHAR(50),
+  fecha_obtencion DATE,
+  fecha_expiracion DATE,
+  url VARCHAR(500),
+  CONSTRAINT pk_certificaciones 
+    PRIMARY KEY (id_usuario, id_logro),
+  CONSTRAINT fk_certificaciones_logros 
+    FOREIGN KEY (id_usuario, id_logro)
+    REFERENCES logros (id_usuario, id_logro)
+    ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+
+
+CREATE TABLE idiomas (
+  id_usuario INTEGER NOT NULL,
+  id_logro INTEGER NOT NULL,
+  nivel VARCHAR(50),
+  CONSTRAINT pk_idiomas
+    PRIMARY KEY (id_usuario, id_logro),
+  CONSTRAINT fk_idiomas_logros 
+    FOREIGN KEY (id_usuario, id_logro)
+    REFERENCES logros (id_usuario, id_logro)
+    ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+
+
+CREATE TABLE publicaciones (
+  id_usuario INTEGER NOT NULL,
+  id_logro INTEGER NOT NULL,
+  fecha_publicacion DATE,
+  url VARCHAR(500),
+  descripcion VARCHAR(500),
+  CONSTRAINT pk_publicaciones
+    PRIMARY KEY (id_usuario, id_logro),
+  CONSTRAINT fk_publicaciones_logros 
+    FOREIGN KEY (id_usuario, id_logro)
+    REFERENCES logros (id_usuario, id_logro)
+    ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+
+
+
+CREATE TABLE autores_publicaciones (
+  id_usuario INTEGER NOT NULL,
+  id_logro INTEGER NOT NULL,
+  id_usuario_autor INTEGER NOT NULL,
+  CONSTRAINT pk_autores_publicaciones
+    PRIMARY KEY (id_usuario, id_logro, id_usuario_autor),
+  CONSTRAINT fk_autores_publicaciones_publicaciones 
+    FOREIGN KEY (id_usuario, id_logro)
+    REFERENCES publicaciones (id_usuario, id_logro)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_autores_publicaciones_usuarios 
+    FOREIGN KEY (id_usuario_autor)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT   
+);
+
+
+CREATE TABLE patentes (
+  id_usuario INTEGER NOT NULL,
+  id_logro INTEGER NOT NULL,
+  pais_registro VARCHAR(500) NOT NULL,
+  numero VARCHAR(50) NOT NULL,
+  estado VARCHAR(50) NOT NULL,
+  fecha_expedicion DATE,
+  url VARCHAR(500),
+  descripcion VARCHAR(500),
+  CONSTRAINT pk_patentes
+    PRIMARY KEY (id_usuario, id_logro),
+  CONSTRAINT fk_patentes_logros 
+    FOREIGN KEY (id_usuario, id_logro)
+    REFERENCES logros (id_usuario, id_logro)
+    ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+CREATE TABLE inventores_patentes (
+  id_usuario INTEGER NOT NULL,
+  id_logro INTEGER NOT NULL,
+  id_usuario_inventor INTEGER NOT NULL,
+  CONSTRAINT pk_inventores_patentes
+    PRIMARY KEY (id_usuario, id_logro, id_usuario_inventor),
+  CONSTRAINT fk_inventores_patentes_patentes 
+    FOREIGN KEY (id_usuario, id_logro)
+    REFERENCES patentes (id_usuario, id_logro)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_inventores_patentes_usuarios 
+    FOREIGN KEY (id_usuario_inventor)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT   
+);
+
+
+-- Empresas
+
+CREATE TABLE empresas (
+  id_empresa INTEGER NOT NULL,
+  nombre VARCHAR(50) NOT NULL,
+  industria VARCHAR(50),
+  descripcion VARCHAR(500),
+  anio_creacion INTEGER,
+  url VARCHAR(500),
+  tipo VARCHAR(50),
+  tamanio INTEGER,
+  id_usuario_creador INTEGER NOT NULL,
+  CONSTRAINT pk_empresas 
+    PRIMARY KEY (id_empresa),
+  CONSTRAINT fk_empresas_usuarios 
+    FOREIGN KEY (id_usuario_creador)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT   
+);
+
+
+CREATE TABLE oficinas (
+  id_empresa INTEGER NOT NULL,
+  nombre VARCHAR(50) NOT NULL,
+  direccion VARCHAR(300) NOT NULL,
+  es_principal BOOLEAN NOT NULL,
+  CONSTRAINT pk_oficinas 
+    PRIMARY KEY (id_empresa, nombre, direccion),
+  CONSTRAINT fk_oficinas_empresas 
+    FOREIGN KEY (id_empresa)
+    REFERENCES empresas (id_empresa)
+    ON UPDATE RESTRICT ON DELETE RESTRICT   
+);
+
 CREATE TABLE experiencias_laborales_empresas (
   id_usuario INTEGER NOT NULL,
   id_experiencia INTEGER NOT NULL,
@@ -135,3 +331,15 @@ CREATE TABLE experiencias_laborales_empresas (
 );
 
 
+
+
+
+
+-- Inserts
+INSERT INTO usuarios
+  VALUES (1, 
+          'Gaston Snaider', 
+          'Ingeniero en Informatica', 
+          'Buenos Aires', 
+          'Software', 
+          'Soy un ingeniero en informatica buscando una empresa con proyectos desafiantes.');
