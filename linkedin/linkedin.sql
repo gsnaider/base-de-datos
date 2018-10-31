@@ -1,3 +1,5 @@
+-- Usuarios
+
 CREATE TABLE usuarios (
   id_usuario INTEGER NOT NULL,
   nombre VARCHAR(30) NOT NULL,
@@ -50,7 +52,6 @@ CREATE TABLE conexiones (
     ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 
-
 CREATE TABLE recomendaciones (
   id_usuario_recomendador INTEGER NOT NULL,
   id_usuario_recomendado INTEGER NOT NULL,
@@ -67,3 +68,70 @@ CREATE TABLE recomendaciones (
     REFERENCES usuarios (id_usuario)
     ON UPDATE RESTRICT ON DELETE RESTRICT
 );
+
+
+-- Experiencias
+
+CREATE TABLE experiencias (
+  id_usuario INTEGER NOT NULL,
+  id_experiencia INTEGER NOT NULL,
+  descripcion VARCHAR(500),
+  fecha_inicial DATE NOT NULL,
+  fecha_final DATE,
+  CONSTRAINT pk_experiencias 
+    PRIMARY KEY (id_usuario, id_experiencia),
+  CONSTRAINT fk_experiencias_usuarios 
+    FOREIGN KEY (id_usuario)
+    REFERENCES usuarios (id_usuario)
+    ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+
+CREATE TABLE educaciones (
+  id_usuario INTEGER NOT NULL,
+  id_experiencia INTEGER NOT NULL,
+  titulo VARCHAR(50) NOT NULL,
+  escuela VARCHAR(50) NOT NULL,
+  disiplina_academica VARCHAR(50),
+  promedio FLOAT(2),
+  CONSTRAINT pk_educaciones 
+    PRIMARY KEY (id_usuario, id_experiencia),
+  CONSTRAINT fk_educaciones_experiencias 
+    FOREIGN KEY (id_usuario, id_experiencia)
+    REFERENCES experiencias (id_usuario, id_experiencia)
+    ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+
+CREATE TABLE experiencias_laborales (
+  id_usuario INTEGER NOT NULL,
+  id_experiencia INTEGER NOT NULL,
+  cargo VARCHAR(50) NOT NULL,
+  ubicacion VARCHAR(300),
+  CONSTRAINT pk_experiencias_laborales 
+    PRIMARY KEY (id_usuario, id_experiencia),
+  CONSTRAINT fk_experiencias_laborales_experiencias 
+    FOREIGN KEY (id_usuario, id_experiencia)
+    REFERENCES experiencias (id_usuario, id_experiencia)
+    ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+
+-- Ejecutar despues de crear tabla empresas
+CREATE TABLE experiencias_laborales_empresas (
+  id_usuario INTEGER NOT NULL,
+  id_experiencia INTEGER NOT NULL,
+  id_empresa INTEGER NOT NULL,
+  CONSTRAINT pk_experiencias_laborales_empresas 
+    PRIMARY KEY (id_usuario, id_experiencia),
+  CONSTRAINT fk_experiencias_laborales_empresas_experiencias_laborales 
+    FOREIGN KEY (id_usuario, id_experiencia)
+    REFERENCES experiencias_laborales (id_usuario, id_experiencia)
+    ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT fk_experiencias_laborales_empresas_empresas 
+    FOREIGN KEY (id_empresa)
+    REFERENCES empresas (id_empresa)
+    ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+
+
