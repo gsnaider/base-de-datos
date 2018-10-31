@@ -662,14 +662,6 @@ INSERT INTO experiencias_laborales VALUES
     'Mountain View, CA'
     );
 
-INSERT INTO experiencias_laborales_empresas VALUES
-(1,1,3),
-(1,2,4),
-(1,3,7),
-(1,4,1),
-(2,1,3),
-(2,2,4);
-
 
 INSERT INTO educaciones VALUES
   (
@@ -758,3 +750,119 @@ INSERT INTO educaciones VALUES
     'Licenciatura en Cs. de Computacion',
     7.1
     );
+
+
+
+-- Experiencias Usuario 3
+
+INSERT INTO experiencias VALUES 
+  (
+    3,
+    1, 
+    'Estudiante de Marketing', 
+    '2012-12-01',
+    NULL 
+    );
+
+INSERT INTO educaciones VALUES
+  (
+    3,
+    1, 
+    'Lic. en Marketing', 
+    'UADE',
+    'Licenciatura en Marketing',
+    NULL
+    );
+
+
+
+
+-- Experiencias Usuario 4
+
+INSERT INTO experiencias VALUES 
+  (
+    4,
+    1, 
+    'Ingeniero en Toyota', 
+    '2014-03-01',
+    '2018-03-24' 
+    );
+
+INSERT INTO experiencias_laborales VALUES 
+  (
+    4,
+    1, 
+    'Desarrollador', 
+    'Buenos Aires'
+    );
+
+-- Experiencias Usuario 5
+
+INSERT INTO experiencias VALUES 
+  (
+    5,
+    1, 
+    'Gerente en General Motors', 
+    '2017-03-01',
+    NULL 
+    );
+
+INSERT INTO experiencias_laborales VALUES 
+  (
+    5,
+    1, 
+    'Gerente', 
+    'Buenos Aires'
+    );
+
+
+-- Experiencias Usuario 6
+
+INSERT INTO experiencias VALUES 
+  (
+    6,
+    1, 
+    'Estudiante', 
+    '2015-03-01',
+    NULL 
+    );
+
+INSERT INTO educaciones VALUES
+  (
+    6,
+    1, 
+    'Lic. en Administracion de Empresas', 
+    'UCA',
+    'Licenciatura en Administracion de Empresas',
+    NULL
+    );
+
+
+INSERT INTO experiencias_laborales_empresas VALUES
+(1,1,3),
+(1,2,4),
+(1,3,7),
+(1,4,1),
+(2,1,3),
+(2,2,4),
+(4,1,5),
+(5,1,8);
+
+
+
+-- Mensajes, Posts y Comentarios
+
+INSERT INTO mensajes VALUES
+(1, 'Hola, como va?', 1, 2),
+(2, 'Todo bien, vos?', 2, 1),
+(3, 'Bien, que bueno trabajar en Mercado Libre!', 1, 2),
+(4, 'Hola, veo que estas estudiando Marketing, estas buscando trabajo?', 5, 3),
+(5, 'Si! que tenes para ofrecerme?', 3, 5);
+
+INSERT INTO posts VALUES
+(1, 'Me encanta trabajar en Google!', 1),
+(2, 'Estoy buscando trabajo en Marketing', 3);
+
+INSERT INTO comentarios VALUES
+(1, 'Si alguno tiene alguna oferta avise!', 2, 3),
+(2, 'Que bueno!', 1, 2);
