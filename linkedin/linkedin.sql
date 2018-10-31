@@ -595,3 +595,166 @@ INSERT INTO empresas VALUES
     'Empresa publica',
     180000,
     7);
+
+
+-- Experiencias Usuario 1
+
+INSERT INTO experiencias VALUES 
+  (
+    1,
+    1, 
+    'Desarrollador en Mercado Libre', 
+    '2014-07-07',
+    '2015-07-07' 
+    ),
+  (
+    1,
+    2, 
+    'Lider tecnico en Despegar', 
+    '2014-07-07',
+    '2014-12-12' 
+    ),
+  (
+    1,
+    3, 
+    'Lider de proyecto en Globant', 
+    '2015-01-07',
+    '2015-11-20' 
+    ),
+  (
+    1,
+    4, 
+    'Software Engineer en Google', 
+    '2015-12-14',
+    NULL 
+    ),
+  (
+    1,
+    5, 
+    'Estudiante de Ingenieria Informatica', 
+    '2008-01-01',
+    '2014-01-01'
+    );
+
+INSERT INTO experiencias_laborales VALUES 
+  (
+    1,
+    1, 
+    'Desarrollador', 
+    'Buenos Aires' 
+    ),
+  (
+    1,
+    2, 
+    'Lider tecnico', 
+    'Buenos Aires'
+    ),
+  (
+    1,
+    3, 
+    'Lider de proyecto', 
+    'Buenos Aires'
+    ),
+  (
+    1,
+    4, 
+    'Software Engineer', 
+    'Mountain View, CA'
+    );
+
+INSERT INTO experiencias_laborales_empresas VALUES
+(1,1,3),
+(1,2,4),
+(1,3,7),
+(1,4,1),
+(2,1,3),
+(2,2,4);
+
+
+INSERT INTO educaciones VALUES
+  (
+    1,
+    5, 
+    'Ingeniero en Informatica', 
+    'Universidad de Buenos Aires',
+    'Ingenieria Informatica',
+    8.5
+    );
+
+-- Logros Usuario 1
+
+INSERT INTO logros VALUES
+  (
+    1,
+    1, 
+    'Certificación Java'),
+(
+    1,
+    2, 
+    'Inglés');
+
+INSERT INTO certificaciones VALUES
+  (
+    1,
+    1, 
+    'IT College',
+    'Sun SL 275',
+    '2014-05-07',
+    NULL);
+
+INSERT INTO idiomas VALUES
+  (
+    1,
+    2, 
+    'Avanzado');
+
+
+
+-- Experiencias Usuario 2
+
+INSERT INTO experiencias VALUES 
+  (
+    2,
+    1, 
+    'Desarrollador en Mercado Libre', 
+    '2016-12-01',
+    '2017-03-24' 
+    ),
+  (
+    2,
+    2, 
+    'Desarrollador en Despegar', 
+    '2017-03-30',
+    NULL 
+    ),
+  (
+    2,
+    3, 
+    'Estudiante de Licenciatura en Cs. de Computacion', 
+    '2011-01-01',
+    '2016-01-01'
+    );
+
+INSERT INTO experiencias_laborales VALUES 
+  (
+    2,
+    1, 
+    'Desarrollador', 
+    'Buenos Aires'
+    ),
+  (
+    2,
+    2, 
+    'Desarrollador', 
+    'Buenos Aires'
+    );
+
+INSERT INTO educaciones VALUES
+  (
+    2,
+    3, 
+    'Lic. en Cs. de Computacion', 
+    'Universidad de Buenos Aires',
+    'Licenciatura en Cs. de Computacion',
+    7.1
+    );
